@@ -17,6 +17,11 @@
 # limitations under the License.
 #
 
+chef_gem 'mysql' do
+    action :nothing
+end.run_action(:install)
+
+
 # assume that the mysql recipe has been executed.
 include_recipe "mysql::server"
 include_recipe "database"
