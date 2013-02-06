@@ -17,6 +17,13 @@
 # limitations under the License.
 #
 
+%w{libmysqlclient-dev
+  }.each do |p|
+  package p do
+    action [:install]
+  end
+end
+
 chef_gem 'mysql' do
     action :nothing
 end.run_action(:install)
