@@ -17,6 +17,21 @@
 # limitations under the License.
 #
 
+execute "apt-get update" do
+  ignore_failure true
+  action :nothing
+end.run_action(:run)
+
+node.set['build_essential']['compiletime'] = true
+include_recipe "build-essential"
+
+%w{build-essential mysql-client libmysqlclient-dev}.each do |p|
+  package p do
+    action :nothing
+  end.run_action(:install)
+end
+
+
 chef_gem 'mysql' do
     action :nothing
 end.run_action(:install)
